@@ -1,0 +1,14 @@
+name: dart_dump
+description: A set of tools for pretty dumping and diffing data structures.
+version: 0.1.0
+homepage: http://github.com/bubnov/dart_dump
+repository: http://github.com/bubnov/dart_dump
+
+environment:
+  sdk: ">=2.17.1 <3.0.0"
+
+dependencies:
+  equatable: ^2.0.3
+
+dev_dependencies:
+  test: ^1.16.0
