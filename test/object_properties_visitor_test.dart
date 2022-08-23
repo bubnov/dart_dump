@@ -50,7 +50,7 @@ class FooWithOptional extends Dumpable {
   final String? optionalString;
 
   @override
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> propertyMap() {
     return <String, dynamic>{
       'optionalString': optionalString,
     };
@@ -67,7 +67,7 @@ class Foo extends Dumpable {
   final int integer;
 
   @override
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> propertyMap() {
     return <String, dynamic>{
       'string': string,
       'integer': integer,

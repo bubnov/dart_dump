@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 
 abstract class Dumpable {
   const Dumpable();
-  Map<String, dynamic> toMap();
+  Map<String, dynamic> propertyMap();
 }
 
 class ObjectPropertyVisitor {
@@ -13,7 +13,18 @@ class ObjectPropertyVisitor {
   Iterable<ObjectProperty> get properties sync* {
     if (_object == null) return;
 
-    final props = _object is Dumpable ? (_object as Dumpable).toMap() : {};
+    Map<String, dynamic> props;
+    if (_object is Dumpable) {
+      props = (_object as Dumpable).propertyMap();
+    } else {
+      try {
+        props = (_object as dynamic).propertyMap();
+      } on NoSuchMethodError {
+        props = {};
+      }
+    }
+
+    // final props = _object is Dumpable ? (_object as Dumpable).propertyMap() : {};
     if (props.isNotEmpty) {
       final propsName = props.keys.toList()..sort();
       for (final propName in propsName) {

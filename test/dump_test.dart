@@ -11,7 +11,7 @@ class Parent extends Dumpable {
   Object? child;
 
   @override
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> propertyMap() {
     return <String, dynamic>{
       'child': child,
     };
@@ -24,7 +24,7 @@ class Id extends Dumpable {
   final String id;
 
   @override
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> propertyMap() {
     return <String, dynamic>{
       'id': id,
     };
@@ -37,7 +37,7 @@ class Value extends Dumpable {
   final String value;
 
   @override
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> propertyMap() {
     return <String, dynamic>{
       'value': value,
     };
@@ -50,7 +50,7 @@ class Bla extends Dumpable {
   final Map<Id, Value> dict;
 
   @override
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> propertyMap() {
     return <String, dynamic>{
       'dict': dict,
     };
@@ -77,7 +77,7 @@ class Foo extends Dumpable {
   final Map<String, dynamic> dict;
 
   @override
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> propertyMap() {
     return <String, dynamic>{
       'bla': bla,
       'string': string,
