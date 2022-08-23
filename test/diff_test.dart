@@ -78,7 +78,7 @@ void main() {
       final obj1 = [1, 2, 3, 4];
       final obj2 = ['2', '4', '5'];
       final result = diffStrings(obj1, obj2, diffConfig: diffConfig).toList();
-      print(diff(obj1, obj2));
+      // print(diff(obj1, obj2));
       expect(result, [
         '  [',
         '-   [0]: 1,',
@@ -215,6 +215,25 @@ void main() {
         '+       \'name\': \'value\'',
         '+     }',
         '+   )',
+        '  )',
+      ]);
+    });
+
+    test('classes with different classes', () {
+      final obj1 = Parent(child: Id(id: 'unique-id'));
+      final obj2 = Parent(child: Empty());
+      final result = diffStrings(
+        obj1,
+        obj2,
+        diffConfig: diffConfig.copyWith(foldUnchanged: false),
+      ).toList();
+      // print(diff(obj1, obj2));
+      expect(result, [
+        '  Parent(',
+        '-   child: Id(',
+        '-     id: \'unique-id\'',
+        '-   )',
+        '+   child: Empty()',
         '  )',
       ]);
     });

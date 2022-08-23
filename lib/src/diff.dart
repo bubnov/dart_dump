@@ -411,9 +411,13 @@ List<String> diffStrings(
   final leftNode = lhs is Node ? lhs : dumpConfig.toNode(lhs);
   final rightNode = rhs is Node ? rhs : dumpConfig.toNode(rhs);
 
-  if (lhs.runtimeType == rhs.runtimeType ||
-      (lhs is Map && rhs is Map) ||
-      (lhs is List && rhs is List)) {
+  if ((leftNode is PairNode && rightNode is PairNode 
+        && leftNode.value.runtimeType == rightNode.value.runtimeType 
+        && (!(leftNode.value is ClassNode) || 
+          (leftNode.value as ClassNode).name == (rightNode.value as ClassNode).name)) ||
+      (leftNode is GroupNode && rightNode is GroupNode && leftNode.name == rightNode.name) ||
+      (leftNode is MapNode && rightNode is MapNode) ||
+      (leftNode is ListNode && rightNode is ListNode)) {
     return diffConfig.formatterFor(leftNode).formatDiff(
           leftNode,
           rightNode,
