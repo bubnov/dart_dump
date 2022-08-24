@@ -5,59 +5,59 @@ enum SimpleEnum { one }
 
 class Empty {}
 
-class Parent extends Dumpable {
+class Parent extends DumpPropertyProvider {
   Parent({this.child});
 
   Object? child;
 
   @override
-  Map<String, dynamic> propertyMap() {
+  Map<String, dynamic> dumpPropertyMap() {
     return <String, dynamic>{
       'child': child,
     };
   }
 }
 
-class Id extends Dumpable {
+class Id extends DumpPropertyProvider {
   Id({required this.id});
 
   final String id;
 
   @override
-  Map<String, dynamic> propertyMap() {
+  Map<String, dynamic> dumpPropertyMap() {
     return <String, dynamic>{
       'id': id,
     };
   }
 }
 
-class Value extends Dumpable {
+class Value extends DumpPropertyProvider {
   Value({required this.value});
 
   final String value;
 
   @override
-  Map<String, dynamic> propertyMap() {
+  Map<String, dynamic> dumpPropertyMap() {
     return <String, dynamic>{
       'value': value,
     };
   }
 }
 
-class Bla extends Dumpable {
+class Bla extends DumpPropertyProvider {
   Bla({required this.dict});
 
   final Map<Id, Value> dict;
 
   @override
-  Map<String, dynamic> propertyMap() {
+  Map<String, dynamic> dumpPropertyMap() {
     return <String, dynamic>{
       'dict': dict,
     };
   }
 }
 
-class Foo extends Dumpable {
+class Foo extends DumpPropertyProvider {
   Foo({
     required this.bla,
     required this.string,
@@ -77,7 +77,7 @@ class Foo extends Dumpable {
   final Map<String, dynamic> dict;
 
   @override
-  Map<String, dynamic> propertyMap() {
+  Map<String, dynamic> dumpPropertyMap() {
     return <String, dynamic>{
       'bla': bla,
       'string': string,

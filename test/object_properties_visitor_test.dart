@@ -42,7 +42,7 @@ void main() {
   });
 }
 
-class FooWithOptional extends Dumpable {
+class FooWithOptional extends DumpPropertyProvider {
   FooWithOptional({
     this.optionalString,
   });
@@ -50,14 +50,14 @@ class FooWithOptional extends Dumpable {
   final String? optionalString;
 
   @override
-  Map<String, dynamic> propertyMap() {
+  Map<String, dynamic> dumpPropertyMap() {
     return <String, dynamic>{
       'optionalString': optionalString,
     };
   }
 }
 
-class Foo extends Dumpable {
+class Foo extends DumpPropertyProvider {
   Foo({
     required this.string,
     required this.integer,
@@ -67,7 +67,7 @@ class Foo extends Dumpable {
   final int integer;
 
   @override
-  Map<String, dynamic> propertyMap() {
+  Map<String, dynamic> dumpPropertyMap() {
     return <String, dynamic>{
       'string': string,
       'integer': integer,

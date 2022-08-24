@@ -198,10 +198,19 @@ Node _objectToNode(
       ),
     );
   }
-  return ClassNode(
-    name: object.runtimeType.toString(),
-    values: propertyNodes,
-  );
+
+  String className;
+  if (object is DumpTypeProvider) {
+    className = object.dumpType();
+  } else {
+    try {
+      className = (object as dynamic).dumpType();
+    } on NoSuchMethodError catch (_) {
+      className = object.runtimeType.toString();
+    }
+  }
+
+  return ClassNode(name: className, values: propertyNodes);
 }
 
 abstract class NodeFormatter {

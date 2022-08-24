@@ -1,8 +1,13 @@
 import 'package:equatable/equatable.dart';
 
-abstract class Dumpable {
-  const Dumpable();
-  Map<String, dynamic> propertyMap();
+abstract class DumpTypeProvider {
+  const DumpTypeProvider();
+  String dumpType();
+}
+
+abstract class DumpPropertyProvider {
+  const DumpPropertyProvider();
+  Map<String, dynamic> dumpPropertyMap();
 }
 
 class ObjectPropertyVisitor {
@@ -14,11 +19,11 @@ class ObjectPropertyVisitor {
     if (_object == null) return;
 
     Map<String, dynamic> props;
-    if (_object is Dumpable) {
-      props = (_object as Dumpable).propertyMap();
+    if (_object is DumpPropertyProvider) {
+      props = (_object as DumpPropertyProvider).dumpPropertyMap();
     } else {
       try {
-        props = (_object as dynamic).propertyMap();
+        props = (_object as dynamic).dumpPropertyMap();
       } on NoSuchMethodError {
         props = {};
       }
