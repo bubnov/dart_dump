@@ -199,16 +199,9 @@ Node _objectToNode(
     );
   }
 
-  String className;
-  if (object is DumpTypeProvider) {
-    className = object.dumpType();
-  } else {
-    try {
-      className = (object as dynamic).dumpType();
-    } on NoSuchMethodError catch (_) {
-      className = object.runtimeType.toString();
-    }
-  }
+  final className = object is DumpTypeProvider
+      ? object.dumpType()
+      : object.runtimeType.toString();
 
   return ClassNode(name: className, values: propertyNodes);
 }

@@ -18,16 +18,9 @@ class ObjectPropertyVisitor {
   Iterable<ObjectProperty> get properties sync* {
     if (_object == null) return;
 
-    Map<String, dynamic> props;
-    if (_object is DumpPropertyProvider) {
-      props = (_object as DumpPropertyProvider).dumpPropertyMap();
-    } else {
-      try {
-        props = (_object as dynamic).dumpPropertyMap();
-      } on NoSuchMethodError {
-        props = {};
-      }
-    }
+    final props = _object is DumpPropertyProvider
+        ? (_object as DumpPropertyProvider).dumpPropertyMap()
+        : {};
 
     // final props = _object is Dumpable ? (_object as Dumpable).propertyMap() : {};
     if (props.isNotEmpty) {
