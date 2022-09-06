@@ -31,8 +31,8 @@ class DiffFormat {
     this.sameFormat = defaultSameFormatter,
   });
 
-  final String removed;
   final String added;
+  final String removed;
   final String same;
   final bool formattingAllowed;
   final DiffStringFormatter? addedFormat;
@@ -217,7 +217,7 @@ class GroupNodeDiffFormatter extends NodeDiffFormatter {
     final indent = dumpConfig.spacer * dumpConfig.level + dumpConfig.spacer;
 
     List<String> valuesLines = [];
-    List<String> unchangedLines = [];
+    List<List<String>> unchangedLines = [];
 
     for (var i = 0; i < count; i++) {
       final leftValue = i < lhsCount ? lhs.values[i] : null;
@@ -234,8 +234,8 @@ class GroupNodeDiffFormatter extends NodeDiffFormatter {
       );
 
       if (diffConfig.foldUnchanged) {
-        if (valuesDiffLines.length == 1) {
-          unchangedLines.addAll(valuesDiffLines);
+        if (leftValue == rightValue) {
+          unchangedLines.add(valuesDiffLines);
         } else {
           _handleUnchanged(
             unchangedLines,
@@ -272,15 +272,15 @@ class GroupNodeDiffFormatter extends NodeDiffFormatter {
   }
 
   _handleUnchanged(
-    List<String> unchangedLines,
+    List<List<String>> unchangedLines,
     List<String> finalLines,
     String indent,
     DiffFormat format, {
     bool last = true,
   }) {
     if (unchangedLines.isEmpty) return;
-    if (unchangedLines.length == 1) {
-      finalLines.addAll(unchangedLines);
+    if (unchangedLines.length == 1 && unchangedLines[0].length == 1) {
+      finalLines.addAll(unchangedLines.expand((e) => e));
     } else {
       finalLines.add(
         format.sameLine(
@@ -413,6 +413,7 @@ List<String> diffStrings(
 
   if ((leftNode is PairNode && rightNode is PairNode 
         && leftNode.value.runtimeType == rightNode.value.runtimeType 
+        && leftNode.last == rightNode.last
         && (!(leftNode.value is ClassNode) || 
           (leftNode.value as ClassNode).name == (rightNode.value as ClassNode).name)) ||
       (leftNode is GroupNode && rightNode is GroupNode && leftNode.name == rightNode.name) ||

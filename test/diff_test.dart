@@ -332,5 +332,61 @@ void main() {
         '  ]',
       ]);
     });
+
+    test('nodes with and without trailing comma', () {
+      final obj1 = Parent(child: [
+        Empty(),
+      ]);
+      final obj2 = Parent(child: [
+        Empty(),
+        2
+      ]);
+      final result = diffStrings(obj1, obj2, diffConfig: diffConfig).toList();
+      // print(diff(obj1, obj2));
+      expect(result, [
+        '  Parent(',
+        '    child: [',
+        '-     [0]: Empty()',
+        '+     [0]: Empty(),',
+        '+     [1]: 2',
+        '    ]',
+        '  )',
+      ]);
+    });
+
+    test('unchanged folding: complex', () {
+      final obj1 = Parent(child: [
+        1, 2, 3, 4, 5,
+        Parent(child: 1),
+        Parent(child: 2),
+        6,
+        Parent(child: {'one': 1, 'two': 2}),
+        2,
+      ]);
+      final obj2 = Parent(child: [
+        1, 2, 3, 4, 5,
+        Parent(child: 1),
+        Parent(child: 3),
+        6,
+        Parent(child: {'one': 1, 'two': 2}),
+        3,
+      ]);
+      final result = diffStrings(obj1, obj2, diffConfig: diffConfig).toList();
+      // print(diff(obj1, obj2));
+      expect(result, [
+        '  Parent(',
+        '    child: [',
+        '      … (6 unchanged),',
+        '      [6]: Parent(',
+        '-       child: 2',
+        '+       child: 3',
+        '      ),',
+        '      … (2 unchanged)',
+        '-     [9]: 2',
+        '+     [9]: 3',
+        '    ]',
+        '  )',
+      ]);
+    });
   });
 }

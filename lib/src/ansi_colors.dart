@@ -10,9 +10,7 @@ class AnsiColor {
   final _escape = '\x1B[';
   String get _reset => '${_escape}0m';
 
-  String call(Object? message) {
-    return '$_codes${message.toString()}$_reset';
-  }
+  String call(Object? message) => '$_codes${message.toString()}$_reset';
 
   bold() => _codes += '${_escape}1m';
 
@@ -37,14 +35,10 @@ class AnsiColor {
   sub() => _codes += '${_escape}74m';
 
   /// `r`, `g` and `b` are in range 0..255
-  fgRGB(double r, double g, double b) {
-    _colorRGB(r, g, b, false);
-  }
+  fgRGB(double r, double g, double b) => _colorRGB(r, g, b, false);
 
   /// `r`, `g` and `b` are in range 0..255
-  bgRGB(double r, double g, double b) {
-    _colorRGB(r, g, b, true);
-  }
+  bgRGB(double r, double g, double b) => _colorRGB(r, g, b, true);
 
   /// i in range 0..7
   fg8(int i) => _color8(i, false, false);
