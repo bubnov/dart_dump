@@ -5,7 +5,7 @@ enum SimpleEnum { one }
 
 class Empty {}
 
-class Parent extends DumpPropertyProvider {
+class Parent with DumpPropertyProvider {
   Parent({this.child});
 
   Object? child;
@@ -18,7 +18,7 @@ class Parent extends DumpPropertyProvider {
   }
 }
 
-class Id extends DumpPropertyProvider {
+class Id with DumpPropertyProvider {
   Id({required this.id});
 
   final String id;
@@ -31,7 +31,7 @@ class Id extends DumpPropertyProvider {
   }
 }
 
-class Value extends DumpPropertyProvider {
+class Value with DumpPropertyProvider {
   Value({required this.value});
 
   final String value;
@@ -44,7 +44,7 @@ class Value extends DumpPropertyProvider {
   }
 }
 
-class Bla extends DumpPropertyProvider {
+class Bla with DumpPropertyProvider {
   Bla({required this.dict});
 
   final Map<Id, Value> dict;
@@ -57,7 +57,7 @@ class Bla extends DumpPropertyProvider {
   }
 }
 
-class Foo extends DumpPropertyProvider {
+class Foo with DumpPropertyProvider {
   Foo({
     required this.bla,
     required this.string,

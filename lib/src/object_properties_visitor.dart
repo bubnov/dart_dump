@@ -1,13 +1,11 @@
 import 'package:equatable/equatable.dart';
 
-abstract class DumpTypeProvider {
-  const DumpTypeProvider();
-  String dumpType();
+mixin DumpTypeProvider {
+  String dumpType() => '$runtimeType';
 }
 
-abstract class DumpPropertyProvider {
-  const DumpPropertyProvider();
-  Map<String, dynamic> dumpPropertyMap();
+mixin DumpPropertyProvider {
+  Map<String, dynamic> dumpPropertyMap() => {};
 }
 
 class ObjectPropertyVisitor {

@@ -42,7 +42,7 @@ void main() {
   });
 }
 
-class FooWithOptional extends DumpPropertyProvider {
+class FooWithOptional with DumpPropertyProvider {
   FooWithOptional({
     this.optionalString,
   });
@@ -57,7 +57,7 @@ class FooWithOptional extends DumpPropertyProvider {
   }
 }
 
-class Foo extends DumpPropertyProvider {
+class Foo with DumpPropertyProvider {
   Foo({
     required this.string,
     required this.integer,
