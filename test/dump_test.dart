@@ -90,6 +90,24 @@ class Foo with DumpPropertyProvider {
   }
 }
 
+class Container with DumpPropertyProvider {
+  const Container({required this.child});
+
+  final Object child;
+
+  @override
+  Map<String, dynamic> dumpPropertyMap() => {'child': child};
+
+  @override
+  bool operator ==(covariant Container other) {
+    if (identical(this, other)) return true;
+    return other.child == child;
+  }
+
+  @override
+  int get hashCode => child.hashCode;
+}
+
 void main() {
   group('object to node', () {
     test('type', () {
@@ -480,6 +498,17 @@ void main() {
       expect(dmp, [
         'Parent(',
         '  child: 🔴 Parent(...)',
+        ')',
+      ]);
+    });
+
+    test('recursion: parent.hashCode == child.hashCode', () {
+      final obj = Container(child: Empty());
+      final dmp = dumpStrings(obj).toList();
+      // print(dump(obj));
+      expect(dmp, [
+        'Container(',
+        '  child: Empty()',
         ')',
       ]);
     });

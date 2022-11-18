@@ -117,12 +117,14 @@ class _ObjectToNodeContext {
   final Set<int> _processedObjectHashes = {};
 
   bool isObjectProcessed(Object object) {
-    return _processedObjectHashes.contains(object.hashCode);
+    return _processedObjectHashes.contains(_objectHash(object));
   }
 
   didProcessObject(Object object) {
-    _processedObjectHashes.add(object.hashCode);
+    _processedObjectHashes.add(_objectHash(object));
   }
+
+  int _objectHash(Object object) => object.runtimeType.hashCode ^ object.hashCode;
 }
 
 Node objectToNode(Object? object) {
