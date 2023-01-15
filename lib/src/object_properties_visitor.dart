@@ -5,7 +5,7 @@ mixin DumpTypeProvider {
 }
 
 mixin DumpPropertyProvider {
-  Map<String, dynamic> dumpPropertyMap() => {};
+  Map<String, dynamic> toMap() => {};
 }
 
 class ObjectPropertyVisitor {
@@ -17,7 +17,7 @@ class ObjectPropertyVisitor {
     if (_object == null) return;
 
     final props = _object is DumpPropertyProvider
-        ? (_object as DumpPropertyProvider).dumpPropertyMap()
+        ? (_object as DumpPropertyProvider).toMap()
         : {};
 
     // final props = _object is Dumpable ? (_object as Dumpable).propertyMap() : {};

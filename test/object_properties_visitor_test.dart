@@ -50,7 +50,7 @@ class FooWithOptional with DumpPropertyProvider {
   final String? optionalString;
 
   @override
-  Map<String, dynamic> dumpPropertyMap() {
+  Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'optionalString': optionalString,
     };
@@ -67,7 +67,7 @@ class Foo with DumpPropertyProvider {
   final int integer;
 
   @override
-  Map<String, dynamic> dumpPropertyMap() {
+  Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'string': string,
       'integer': integer,

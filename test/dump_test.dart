@@ -11,7 +11,7 @@ class Parent with DumpPropertyProvider {
   Object? child;
 
   @override
-  Map<String, dynamic> dumpPropertyMap() {
+  Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'child': child,
     };
@@ -24,7 +24,7 @@ class Id with DumpPropertyProvider {
   final String id;
 
   @override
-  Map<String, dynamic> dumpPropertyMap() {
+  Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
     };
@@ -37,7 +37,7 @@ class Value with DumpPropertyProvider {
   final String value;
 
   @override
-  Map<String, dynamic> dumpPropertyMap() {
+  Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'value': value,
     };
@@ -50,7 +50,7 @@ class Bla with DumpPropertyProvider {
   final Map<Id, Value> dict;
 
   @override
-  Map<String, dynamic> dumpPropertyMap() {
+  Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'dict': dict,
     };
@@ -77,7 +77,7 @@ class Foo with DumpPropertyProvider {
   final Map<String, dynamic> dict;
 
   @override
-  Map<String, dynamic> dumpPropertyMap() {
+  Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'bla': bla,
       'string': string,
@@ -96,7 +96,7 @@ class Container with DumpPropertyProvider {
   final Object child;
 
   @override
-  Map<String, dynamic> dumpPropertyMap() => {'child': child};
+  Map<String, dynamic> toMap() => {'child': child};
 
   @override
   bool operator ==(covariant Container other) {
